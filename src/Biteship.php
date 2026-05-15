@@ -2,6 +2,8 @@
 
 namespace Cloudenum\Biteship;
 
+use Cloudenum\Biteship\Exceptions\InvalidArgumentException;
+
 class Biteship
 {
     /**
@@ -9,7 +11,7 @@ class Biteship
      *
      * @param  array  $config  The API configuration
      *
-     * @throws \Cloudenum\Biteship\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function api(array $config = []): BiteshipApi
     {

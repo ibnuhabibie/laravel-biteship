@@ -2,6 +2,9 @@
 
 namespace Cloudenum\Biteship;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+
 /**
  * Location Model
  *
@@ -49,13 +52,12 @@ class Location extends BiteshipObject
      * Create a new Location
      *
      * @param  array  $data  The location data
-     * @return static
      *
      * @see https://biteship.com/id/docs/api/locations/create
      */
     public static function create(array $data): static
     {
-        $data = \Illuminate\Support\Arr::whereNotNull($data);
+        $data = Arr::whereNotNull($data);
 
         $response = Biteship::api()->post(self::$apiUri, $data);
         $responseJson = $response->json();
@@ -67,7 +69,6 @@ class Location extends BiteshipObject
      * Find a Location by ID
      *
      * @param  string  $id  The location ID
-     * @return static
      *
      * @see https://biteship.com/id/docs/api/locations/retrieve
      */
@@ -82,11 +83,11 @@ class Location extends BiteshipObject
     /**
      * Get all locations
      *
-     * @return \Illuminate\Support\Collection<Location>
+     * @return Collection<Location>
      *
      * @see https://biteship.com/id/docs/api/locations/list
      */
-    public static function all(): \Illuminate\Support\Collection
+    public static function all(): Collection
     {
         $response = Biteship::api()->get(self::$apiUri);
         $responseJson = $response->json();
@@ -111,7 +112,7 @@ class Location extends BiteshipObject
             $location = new static(['id' => $id]);
         }
 
-        $data = \Illuminate\Support\Arr::whereNotNull($data);
+        $data = Arr::whereNotNull($data);
 
         $response = Biteship::api()->put(self::$apiUri.'/'.$location->id, $data);
         $responseJson = $response->json();
@@ -127,7 +128,6 @@ class Location extends BiteshipObject
      * Delete a Location
      *
      * @param  string  $id  The location ID
-     * @return bool
      *
      * @see https://biteship.com/id/docs/api/locations/delete
      */

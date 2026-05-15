@@ -3,6 +3,7 @@
 namespace Cloudenum\Biteship\Tests;
 
 use Cloudenum\Biteship\Courier;
+use Illuminate\Support\Collection;
 
 class CourierTest extends TestCase
 {
@@ -59,7 +60,7 @@ class CourierTest extends TestCase
 
         $couriers = Courier::all();
 
-        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $couriers);
+        $this->assertInstanceOf(Collection::class, $couriers);
         $this->assertCount(2, $couriers);
 
         $courier = $couriers->first();

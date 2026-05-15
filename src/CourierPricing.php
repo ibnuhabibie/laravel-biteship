@@ -2,6 +2,8 @@
 
 namespace Cloudenum\Biteship;
 
+use Illuminate\Support\Arr;
+
 /**
  * @property array|null $origin
  * @property array|null $destination
@@ -25,7 +27,7 @@ class CourierPricing extends BiteshipObject
      */
     public static function Rates(array $data): CourierPricing
     {
-        $data = \Illuminate\Support\Arr::whereNotNull($data);
+        $data = Arr::whereNotNull($data);
 
         $response = Biteship::api()->post(self::$apiUri, $data);
         $responseJson = $response->json();
