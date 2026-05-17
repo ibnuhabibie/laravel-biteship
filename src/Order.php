@@ -2,6 +2,7 @@
 
 namespace Cloudenum\Biteship;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Arr;
 
 /**
@@ -113,7 +114,7 @@ class Order extends BiteshipObject
      *
      * @see https://biteship.com/id/docs/api/orders/shipping-label
      */
-    public function shippingLabel(array $options = []): \Illuminate\Http\Client\Response
+    public function shippingLabel(array $options = []): Response
     {
         $defaultOptions = [
             'paper_size' => '10x15cm',
