@@ -3,6 +3,7 @@
 namespace Cloudenum\Biteship\Tests;
 
 use Cloudenum\Biteship\BiteshipObject;
+use Cloudenum\Biteship\Courier;
 
 class BiteshipObjectTest extends TestCase
 {
@@ -92,7 +93,7 @@ class BiteshipObjectTest extends TestCase
     public function test_object_serialize_and_unserialize()
     {
         // use any random class that extend the BiteshipObject class
-        $object = new \Cloudenum\Biteship\Courier;
+        $object = new Courier;
 
         $object->courier_name = 'Grab';
         $object->available_for_proof_of_delivery = true;

@@ -2,6 +2,8 @@
 
 namespace Cloudenum\Biteship;
 
+use Illuminate\Support\Collection;
+
 /**
  * @property string|null $id
  * @property string|null $name
@@ -43,11 +45,11 @@ class Area extends BiteshipObject
      * @param  string  $input  The search input
      * @param  string  $countries  The country code
      * @param  bool  $double  True for double search, single search otherwise
-     * @return \Illuminate\Support\Collection<Area>
+     * @return Collection<Area>
      *
      * @see https://biteship.com/id/docs/api/maps/retrieve_area_single
      */
-    public static function search(string $input, string $countries = 'ID', bool $double = false): \Illuminate\Support\Collection
+    public static function search(string $input, string $countries = 'ID', bool $double = false): Collection
     {
         $params = [
             'input' => $input,
@@ -67,9 +69,9 @@ class Area extends BiteshipObject
      * Search for areas by double search input.
      *
      * @param  string  $id  The area id from previous search result
-     * @return \Illuminate\Support\Collection<Area>
+     * @return Collection<Area>
      */
-    public static function doubleSearchSecondRequest(string $id): \Illuminate\Support\Collection
+    public static function doubleSearchSecondRequest(string $id): Collection
     {
         $response = Biteship::api()->get(self::$apiUri.'/'.$id);
         $responseJson = $response->json();

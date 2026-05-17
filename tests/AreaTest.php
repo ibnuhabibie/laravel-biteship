@@ -3,6 +3,7 @@
 namespace Cloudenum\Biteship\Tests;
 
 use Cloudenum\Biteship\Area;
+use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Support\Collection;
 
 class AreaTest extends TestCase
@@ -56,7 +57,7 @@ class AreaTest extends TestCase
     {
         $this->mockApiResponse(['success' => false], 500);
 
-        $this->expectException(\Illuminate\Http\Client\HttpClientException::class);
+        $this->expectException(HttpClientException::class);
         $this->expectExceptionCode(500);
         Area::search('ErrorCase');
     }

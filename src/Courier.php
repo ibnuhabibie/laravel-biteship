@@ -2,6 +2,8 @@
 
 namespace Cloudenum\Biteship;
 
+use Illuminate\Support\Collection;
+
 /**
  * @property array|null $available_collection_method
  * @property bool $available_for_cash_on_delivery
@@ -42,11 +44,11 @@ class Courier extends BiteshipObject
     /**
      * Get the list of avalaible couriers
      *
-     * @return \Illuminate\Support\Collection<Courier>
+     * @return Collection<Courier>
      *
      * @see https://biteship.com/id/docs/api/couriers/retrieve
      */
-    public static function all(): \Illuminate\Support\Collection
+    public static function all(): Collection
     {
         $response = Biteship::api()->get(self::$apiUri);
         $responseJson = $response->json();

@@ -2,6 +2,8 @@
 
 namespace Cloudenum\Biteship;
 
+use Illuminate\Support\Arr;
+
 /**
  * Order Model
  *
@@ -60,7 +62,7 @@ class Order extends BiteshipObject
      */
     public static function create(array $data): static
     {
-        $data = \Illuminate\Support\Arr::whereNotNull($data);
+        $data = Arr::whereNotNull($data);
 
         $response = Biteship::api()->post(self::$apiUri, $data);
         $responseJson = $response->json();
@@ -84,14 +86,14 @@ class Order extends BiteshipObject
      *
      * @see https://biteship.com/id/docs/api/orders/update
      */
-    public static function update(Order|string $id, array $data): \Cloudenum\Biteship\Order
+    public static function update(Order|string $id, array $data): Order
     {
         $order = $id;
         if (is_string($order)) {
             $order = new static(['id' => $id]);
         }
 
-        $data = \Illuminate\Support\Arr::whereNotNull($data);
+        $data = Arr::whereNotNull($data);
 
         $response = Biteship::api()->post(self::$apiUri.'/'.$order->id, $data);
         $responseJson = $response->json();
