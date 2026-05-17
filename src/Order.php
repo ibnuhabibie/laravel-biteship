@@ -104,6 +104,43 @@ class Order extends BiteshipObject
     }
 
     /**
+     * Generate a shipping label for the Order
+     *
+     * @param  array  $options  Label options (paper_size, insurance_shown, etc.)
+     * @return array The shipping label response containing label URL
+     *
+     * @see https://biteship.com/id/docs/api/orders/shipping-label
+     */
+    public function shippingLabel(array $options = []): \Illuminate\Http\Client\Response
+    {
+        $defaultOptions = [
+            'paper_size' => '10x15cm',
+            'insurance_shown' => true,
+            'shipping_fee_shown' => true,
+            'item_description_shown' => true,
+            'item_sku_shown' => true,
+            'origin_phone_shown' => true,
+            'origin_address_shown' => true,
+            'receiver_phone_shown' => true,
+            'censor_receiver_name' => true,
+        ];
+
+        $data = array_merge($defaultOptions, $options);
+
+        $queryParams = array_filter([
+            'organization_id' => config('biteship.organization_id'),
+            'environment' => config('biteship.environment'),
+        ]);
+
+        $url = self::$apiUri.'/'.$this->id.'/shipping_labels';
+        if (! empty($queryParams)) {
+            $url .= '?'.http_build_query($queryParams);
+        }
+
+        return Biteship::api()->post($url, $data);
+    }
+
+    /**
      * Cancel the Order
      *
      * @param  string  $reason  The reason why the order is canceled
